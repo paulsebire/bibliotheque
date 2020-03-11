@@ -16,10 +16,10 @@
     <bytecodeTargetLevel>
       <module name="book" target="11" />
       <module name="books" target="11" />
-      <module name="clientui" target="1.8" />
-      <module name="config-server" target="1.8" />
-      <module name="eureka-server" target="1.8" />
-      <module name="zuul-server" target="1.8" />
+      <module name="clientui" target="11" />
+      <module name="config-server" target="11" />
+      <module name="eureka-server" target="11" />
+      <module name="zuul-server" target="11" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
