@@ -20,9 +20,9 @@ import java.util.Date;
 @EnableConfigurationProperties
 @EnableDiscoveryClient
 public class MBooksApplication {
+
 	@Autowired
 	private ReservationRepository reservationRepository;
-
 	@Autowired
 	private BibliServiceImpl bibliService;
 	@Autowired
