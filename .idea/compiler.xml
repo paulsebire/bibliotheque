@@ -9,27 +9,27 @@
         <module name="eureka-server" />
         <module name="config-server" />
         <module name="zuul-server" />
-        <module name="books" />
+        <module name="mBooks" />
         <module name="clientui" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="book" target="11" />
-      <module name="books" target="11" />
       <module name="clientui" target="11" />
       <module name="config-server" target="11" />
       <module name="eureka-server" target="11" />
       <module name="mbooks" target="11" />
+      <module name="mBooks" target="1.8" />
       <module name="zuul-server" target="11" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="book" options="-parameters" />
-      <module name="books" options="-parameters" />
       <module name="clientui" options="-parameters" />
       <module name="config-server" options="-parameters" />
       <module name="eureka-server" options="-parameters" />
+      <module name="mBooks" options="-parameters" />
       <module name="mbooks" options="-parameters" />
       <module name="zuul-server" options="-parameters" />
     </option>

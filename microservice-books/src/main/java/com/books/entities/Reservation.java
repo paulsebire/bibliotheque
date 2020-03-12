@@ -18,10 +18,6 @@ public class Reservation implements Serializable {
     @JoinColumn(name ="ID_COPY" )
     private Copy copy;
 
-    //@ManyToOne
-    //@JoinColumn(name ="id_user" )
-    //private Utilisateur utilisateur;
-
     public Reservation() {
         super();
     }

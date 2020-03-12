@@ -30,6 +30,14 @@ public class Copy implements Serializable {
         return id;
     }
 
+    public Reservation getReservation() {
+        return reservation;
+    }
+
+    public void setReservation(Reservation reservation) {
+        this.reservation = reservation;
+    }
+
     public void setId(Long id) {
         this.id = id;
     }
