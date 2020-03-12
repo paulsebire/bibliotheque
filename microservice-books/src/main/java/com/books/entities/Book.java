@@ -5,7 +5,7 @@ import java.io.Serializable;
 import java.util.Collection;
 
 @Entity
-public class Book implements Serializable {
+public class Book{
     @Id @GeneratedValue
     private long id;
     private String name;

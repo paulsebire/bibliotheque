@@ -5,7 +5,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Entity
-public class Reservation implements Serializable {
+public class Reservation {
     @Id@GeneratedValue
     @Column(name = "id_reservation")
     private Long id;

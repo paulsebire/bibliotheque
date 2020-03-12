@@ -19,7 +19,7 @@
       <module name="config-server" target="11" />
       <module name="eureka-server" target="11" />
       <module name="mbooks" target="11" />
-      <module name="mBooks" target="1.8" />
+      <module name="mBooks" target="11" />
       <module name="zuul-server" target="11" />
     </bytecodeTargetLevel>
   </component>

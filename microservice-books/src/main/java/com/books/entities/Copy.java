@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-public class Copy implements Serializable {
+public class Copy{
     @Id @GeneratedValue
     @Column(name = "id_copy")
     private Long id;
