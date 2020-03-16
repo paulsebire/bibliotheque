@@ -41,8 +41,8 @@ public class ClientController {
     * Opération qui récupère les détails d'un produit
     * On passe l'objet "produit" récupéré et qui contient les détails en question à  FicheProduit.html
     * */
-    @RequestMapping("/livre/{id}")
-    public String ficheProduit(@PathVariable int id,  Model model){
+    @RequestMapping("/fiche-livre/{id}")
+    public String ficheLivre(@PathVariable int id,  Model model){
 
         BookBean livre = booksProxy.recupererUnLivre(id);
         int nbCopies= booksProxy.nombreDeCopiesDispo(id);
