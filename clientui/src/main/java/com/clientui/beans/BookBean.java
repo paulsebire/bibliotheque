@@ -1,10 +1,18 @@
 package com.clientui.beans;
 
+
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+
+import java.io.Serializable;
 import java.util.Collection;
-import java.util.Date;
 
 
-public class BookBean {
+@Getter
+@Setter
+@Data
+ public class BookBean implements Serializable {
     private long id;
     private String name;
     private String author;

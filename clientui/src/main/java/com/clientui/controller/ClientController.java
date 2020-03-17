@@ -2,20 +2,24 @@ package com.clientui.controller;
 
 import com.clientui.beans.BookBean;
 import com.clientui.proxies.MicroserviceBooksProxy;
+
+import com.sun.org.slf4j.internal.Logger;
+import com.sun.org.slf4j.internal.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.*;
-import java.util.concurrent.ThreadLocalRandom;
+
+
 
 
 @Controller
 public class ClientController {
+
+    Logger log = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
     private MicroserviceBooksProxy booksProxy;
@@ -32,7 +36,7 @@ public class ClientController {
         List<BookBean> livres =  booksProxy.bookList();
 
         model.addAttribute("livres", livres);
-
+        log.trace("Récupération de la liste des livres");
         return "Accueil";
     }
 
