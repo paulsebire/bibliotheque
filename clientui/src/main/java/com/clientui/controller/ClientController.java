@@ -3,8 +3,8 @@ package com.clientui.controller;
 import com.clientui.beans.BookBean;
 import com.clientui.proxies.MicroserviceBooksProxy;
 
-import com.sun.org.slf4j.internal.Logger;
-import com.sun.org.slf4j.internal.LoggerFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,11 +32,9 @@ public class ClientController {
     * */
     @RequestMapping("/")
     public String accueil(Model model){
-
         List<BookBean> livres =  booksProxy.bookList();
-
         model.addAttribute("livres", livres);
-        log.trace("Récupération de la liste des livres");
+        log.info("Récupération de la liste des livres");
         return "Accueil";
     }
 
@@ -52,6 +50,7 @@ public class ClientController {
         int nbCopies= booksProxy.nombreDeCopiesDispo(id);
         model.addAttribute("livre", livre);
         model.addAttribute("nbCopies",nbCopies);
+        log.trace("Récupération de la fiche d'un livre");
         return "FicheLivre";
     }
 

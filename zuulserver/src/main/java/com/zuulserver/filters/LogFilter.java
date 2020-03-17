@@ -35,7 +35,7 @@ public class LogFilter extends ZuulFilter {
 
         HttpServletRequest req = RequestContext.getCurrentContext().getRequest();
 
-        log.info("**** Requête interceptée ! L'URL est : {} " , req.getRequestURL());
+        log.info("L'URL est : {}",req.getRequestURL());
 
         return null;
     }
