@@ -1,10 +1,12 @@
 package com.books.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 
-import java.util.Collection;
+
+import java.util.List;
 
 @Entity
 public class Book{
@@ -13,9 +15,9 @@ public class Book{
     private String name;
     private String author;
     private String coverUrl;
-    @JsonBackReference
-    @OneToMany(mappedBy = "book",fetch = FetchType.LAZY, cascade = CascadeType.ALL )
-    private Collection<Copy> copies;
+    @JsonManagedReference
+    @OneToMany(mappedBy = "book",fetch = FetchType.EAGER, cascade = CascadeType.ALL )
+    private List<Copy> copies;
 
     public Book() {super();}
 
@@ -57,11 +59,11 @@ public class Book{
         this.coverUrl = coverUrl;
     }
 
-    public Collection<Copy> getCopies() {
+    public List<Copy> getCopies() {
         return copies;
     }
 
-    public void setCopies(Collection<Copy> copies) {
+    public void setCopies(List<Copy> copies) {
         this.copies = copies;
     }
 
@@ -72,7 +74,6 @@ public class Book{
                 ", name='" + name + '\'' +
                 ", author='" + author + '\'' +
                 ", coverUrl='" + coverUrl + '\'' +
-                ", copies=" + copies +
                 '}';
     }
 }

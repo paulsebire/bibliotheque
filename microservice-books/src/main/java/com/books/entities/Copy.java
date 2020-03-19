@@ -14,7 +14,7 @@ public class Copy{
     private Long id;
 
     private String serialNumber;
-    @JsonManagedReference
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name ="id" )
     private Book book;

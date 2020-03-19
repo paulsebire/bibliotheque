@@ -15,9 +15,7 @@ import java.util.Collection;
     private String name;
     private String author;
     private String coverUrl;
-
-    @JsonProperty("copies")
-    private Collection<CopyBean> copiesBean;
+    private Collection<CopyBean> copies;
 
      public BookBean() {
 
@@ -55,22 +53,22 @@ import java.util.Collection;
         this.coverUrl = coverUrl;
     }
 
-    public Collection<CopyBean> getCopiesBean() {
-        return copiesBean;
-    }
+     public Collection<CopyBean> getCopies() {
+         return copies;
+     }
 
-    public void setCopiesBean(Collection<CopyBean> copiesBean) {
-        this.copiesBean = copiesBean;
-    }
+     public void setCopies(Collection<CopyBean> copies) {
+         this.copies = copies;
+     }
 
-    @Override
+     @Override
     public String toString() {
         return "BookBean{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", author='" + author + '\'' +
                 ", coverUrl='" + coverUrl + '\'' +
-                ", copiesBean=" + copiesBean +
+                ", copiesBean=" + copies +
                 '}';
     }
 }
