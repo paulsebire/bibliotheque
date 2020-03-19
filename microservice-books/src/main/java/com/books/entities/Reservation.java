@@ -1,5 +1,7 @@
 package com.books.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -13,8 +15,8 @@ public class Reservation {
     private Date dateEmprunt;
     private Date dateRetour;
     private boolean prolonger=false;
-
-    @OneToOne
+    @JsonManagedReference
+    @ManyToOne
     @JoinColumn(name ="ID_COPY" )
     private Copy copy;
 
@@ -25,6 +27,7 @@ public class Reservation {
     public Reservation(Copy copy, Date dateEmprunt) {
         this.dateEmprunt=dateEmprunt;
         this.prolonger=false;
+        this.copy=copy;
     }
 
     public Long getId() {
@@ -66,5 +69,16 @@ public class Reservation {
 
     public void setDateRetour(Date dateRetour) {
         this.dateRetour = dateRetour;
+    }
+
+    @Override
+    public String toString() {
+        return "Reservation{" +
+                "id=" + id +
+                ", dateEmprunt=" + dateEmprunt +
+                ", dateRetour=" + dateRetour +
+                ", prolonger=" + prolonger +
+                ", copy=" + copy +
+                '}';
     }
 }

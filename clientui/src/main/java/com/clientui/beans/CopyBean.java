@@ -1,13 +1,17 @@
 package com.clientui.beans;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.Collection;
 
 
 public class CopyBean {
     private Long id;
     private String serialNumber;
+    @JsonProperty("book")
     private BookBean book;
-    private ReservationBean reservation;
+    @JsonProperty("reservation")
+    private Collection<ReservationBean> reservation;
 
     public CopyBean() {
     }
@@ -36,11 +40,11 @@ public class CopyBean {
         this.book = book;
     }
 
-    public ReservationBean getReservation() {
+    public Collection<ReservationBean> getReservation() {
         return reservation;
     }
 
-    public void setReservation(ReservationBean reservation) {
+    public void setReservation(Collection<ReservationBean> reservation) {
         this.reservation = reservation;
     }
 

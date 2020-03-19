@@ -1,7 +1,11 @@
 package com.books.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
-import java.io.Serializable;
+import java.util.Collection;
+
 
 @Entity
 public class Copy{
@@ -10,14 +14,13 @@ public class Copy{
     private Long id;
 
     private String serialNumber;
-
+    @JsonManagedReference
     @ManyToOne
     @JoinColumn(name ="id" )
     private Book book;
-
-    @OneToOne
-    @JoinColumn(name ="ID_RESERVATION" )
-    private Reservation reservation;
+    @JsonBackReference
+    @OneToMany(mappedBy = "copy",fetch = FetchType.LAZY, cascade = CascadeType.ALL )
+    private Collection<Reservation> reservation;
 
     public Copy() { super();}
 
@@ -30,11 +33,11 @@ public class Copy{
         return id;
     }
 
-    public Reservation getReservation() {
+    public Collection<Reservation> getReservation() {
         return reservation;
     }
 
-    public void setReservation(Reservation reservation) {
+    public void setReservation(Collection<Reservation> reservation) {
         this.reservation = reservation;
     }
 
@@ -56,5 +59,15 @@ public class Copy{
 
     public void setBook(Book book) {
         this.book = book;
+    }
+
+    @Override
+    public String toString() {
+        return "Copy{" +
+                "id=" + id +
+                ", serialNumber='" + serialNumber + '\'' +
+                ", book=" + book +
+                ", reservation=" + reservation +
+                '}';
     }
 }

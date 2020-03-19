@@ -1,6 +1,7 @@
 package com.clientui.beans;
 
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -9,18 +10,18 @@ import java.io.Serializable;
 import java.util.Collection;
 
 
-@Getter
-@Setter
-@Data
- public class BookBean implements Serializable {
+ public class BookBean {
     private long id;
     private String name;
     private String author;
     private String coverUrl;
-    private Collection<CopyBean> copies;
 
-    public BookBean() {
-    }
+    @JsonProperty("copies")
+    private Collection<CopyBean> copiesBean;
+
+     public BookBean() {
+
+     }
 
     public long getId() {
         return id;
@@ -54,22 +55,22 @@ import java.util.Collection;
         this.coverUrl = coverUrl;
     }
 
-    public Collection<CopyBean> getCopies() {
-        return copies;
+    public Collection<CopyBean> getCopiesBean() {
+        return copiesBean;
     }
 
-    public void setCopies(Collection<CopyBean> copies) {
-        this.copies = copies;
+    public void setCopiesBean(Collection<CopyBean> copiesBean) {
+        this.copiesBean = copiesBean;
     }
 
     @Override
     public String toString() {
         return "BookBean{" +
                 "id=" + id +
-                ", name=" + name +
-                ", author=" + author +
-                ", coverUrl=" + coverUrl +
-                ", copies=" + copies.size() +
+                ", name='" + name + '\'' +
+                ", author='" + author + '\'' +
+                ", coverUrl='" + coverUrl + '\'' +
+                ", copiesBean=" + copiesBean +
                 '}';
     }
 }

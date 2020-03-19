@@ -1,5 +1,7 @@
 package com.clientui.beans;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.Collection;
 import java.util.Date;
 
@@ -9,6 +11,7 @@ public class ReservationBean {
     private Date dateEmprunt;
     private Date dateRetour;
     private boolean prolonger=false;
+    @JsonProperty("copy")
     private CopyBean copy;
 
     public ReservationBean() {

@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -30,7 +31,7 @@ public class ClientController {
     * Les produits sont récupérés grâce à ProduitsProxy
     * On fini par rentourner la page Accueil.html à laquelle on passe la liste d'objets "produits" récupérés.
     * */
-    @RequestMapping("/")
+    @GetMapping("/")
     public String accueil(Model model){
         List<BookBean> livres =  booksProxy.bookList();
         model.addAttribute("livres", livres);
@@ -43,7 +44,7 @@ public class ClientController {
     * Opération qui récupère les détails d'un produit
     * On passe l'objet "produit" récupéré et qui contient les détails en question à  FicheProduit.html
     * */
-    @RequestMapping("/fiche-livre/{id}")
+    @GetMapping("/fiche-livre/{id}")
     public String ficheLivre(@PathVariable int id,  Model model){
 
         BookBean livre = booksProxy.recupererUnLivre(id);

@@ -112,19 +112,19 @@ public class BooksApplication {
 			reservationRepository.save(resa1);
 
 			Reservation resa2 = new Reservation(copy8, new Date());
-			resa1.setDateRetour(bibliService.ajouter4semaines(resa2.getDateEmprunt()));
+			resa2.setDateRetour(bibliService.ajouter4semaines(resa2.getDateEmprunt()));
 			reservationRepository.save(resa2);
 
 			Reservation resa3 = new Reservation(copy10, new Date());
-			resa1.setDateRetour(bibliService.ajouter4semaines(resa3.getDateEmprunt()));
+			resa3.setDateRetour(bibliService.ajouter4semaines(resa3.getDateEmprunt()));
 			reservationRepository.save(resa3);
 
 			Reservation resa4 = new Reservation(copy14, new Date());
-			resa1.setDateRetour(bibliService.ajouter4semaines(resa4.getDateEmprunt()));
+			resa4.setDateRetour(bibliService.ajouter4semaines(resa4.getDateEmprunt()));
 			reservationRepository.save(resa4);
 
 			Reservation resa5 = new Reservation(copy18, new Date());
-			resa1.setDateRetour(bibliService.ajouter4semaines(resa5.getDateEmprunt()));
+			resa5.setDateRetour(bibliService.ajouter4semaines(resa5.getDateEmprunt()));
 			reservationRepository.save(resa5);
 
 

@@ -1,5 +1,7 @@
 package com.books.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 
 import java.util.Collection;
@@ -11,7 +13,7 @@ public class Book{
     private String name;
     private String author;
     private String coverUrl;
-
+    @JsonBackReference
     @OneToMany(mappedBy = "book",fetch = FetchType.LAZY, cascade = CascadeType.ALL )
     private Collection<Copy> copies;
 
@@ -61,5 +63,16 @@ public class Book{
 
     public void setCopies(Collection<Copy> copies) {
         this.copies = copies;
+    }
+
+    @Override
+    public String toString() {
+        return "Book{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", author='" + author + '\'' +
+                ", coverUrl='" + coverUrl + '\'' +
+                ", copies=" + copies +
+                '}';
     }
 }

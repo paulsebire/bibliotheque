@@ -7,12 +7,13 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 
 @FeignClient(name = "zuul-server",contextId = "microserviceBooksProxy",configuration= FeignConfig.class)
-@RibbonClient(name ="microservice-books")
 @Component
+@RibbonClient(name = "microservice-books")
 public interface MicroserviceBooksProxy {
 
     @GetMapping(value = "/microservice-books/livres")
