@@ -48,9 +48,8 @@ public class ClientController {
     public String ficheLivre(@PathVariable int id,  Model model){
 
         BookBean livre = booksProxy.recupererUnLivre(id);
-        int nbCopies= booksProxy.nombreDeCopiesDispo(id);
         model.addAttribute("livre", livre);
-        model.addAttribute("nbCopies",nbCopies);
+        //model.addAttribute("nbCopies",);
         log.trace("Récupération de la fiche d'un livre");
         return "FicheLivre";
     }

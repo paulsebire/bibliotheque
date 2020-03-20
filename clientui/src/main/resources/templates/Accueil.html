@@ -1,33 +1,39 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
 <head>
-    <title>Mcommerce</title>
+    <meta charset="UTF-8"/>
+    <title>Biliothèque</title>
 
-    <link rel="stylesheet" type="text/css" href="webjars/bootstrap/4.0.0-2/css/bootstrap.min.css" />
-
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+          integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+    <link
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+            crossorigin="anonymous" />
+    <script
+            src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+    <script
+            src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"
+            integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o"
+            crossorigin="anonymous"></script>
 </head>
-<body>
-
-
-<div class="container">
-
-    <h1 class="text-center" >Application Bibiotheque</h1>
-
-    <div class="row">
-
-        <div th:each="livre : ${livres}" class="col-md-4 my-1">
-            <a th:href="@{|/fiche-livre/${livre.id}|}" >
-                <img th:src="${livre.coverUrl}"  class="card-img-top" />
+<body layout:fragment="content">
+    <div class="container">
+        <h1 class="text-center" >Application Bibiotheque</h1>
+        <div class="row">
+            <div th:each="livre : ${livres}" class="col-md-3 my-1">
+                <a th:href="@{|/fiche-livre/${livre.id}|}" >
+                <img th:src="${livre.coverUrl}"  class="card-img-top" width="200" height="350" /></a>
                 <p th:text= "${livre.name}"></p>
                 <p th:text= "${livre.author}"></p>
-            </a>
+            </div>
         </div>
     </div>
-
-</div>
-
-
-<script type="text/javascript" src="webjars/bootstrap/4.0.0-2/js/bootstrap.min.js"></script>
-
 </body>
 </html>

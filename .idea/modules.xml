@@ -7,6 +7,7 @@
       <module fileurl="file://$PROJECT_DIR$/config-server-repo/config-server-repo.iml" filepath="$PROJECT_DIR$/config-server-repo/config-server-repo.iml" />
       <module fileurl="file://$PROJECT_DIR$/eureka-server/eureka-server.iml" filepath="$PROJECT_DIR$/eureka-server/eureka-server.iml" />
       <module fileurl="file://$PROJECT_DIR$/microservice-books/microservice-books.iml" filepath="$PROJECT_DIR$/microservice-books/microservice-books.iml" />
+      <module fileurl="file://$PROJECT_DIR$/microservice-utilisateur/microservice-utilisateur.iml" filepath="$PROJECT_DIR$/microservice-utilisateur/microservice-utilisateur.iml" />
       <module fileurl="file://$PROJECT_DIR$/zuulserver/zuulserver.iml" filepath="$PROJECT_DIR$/zuulserver/zuulserver.iml" />
     </modules>
   </component>
