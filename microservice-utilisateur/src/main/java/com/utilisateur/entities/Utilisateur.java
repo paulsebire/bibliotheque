@@ -6,24 +6,20 @@ import com.utilisateur.enums.RoleEnum;
 import com.utilisateur.services.BCryptManagerUtil;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.AuthorityUtils;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.util.StringUtils;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.util.Collection;
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.stream.Collectors;
+
 
 @Entity
 @Table(name = "users")
-public class Utilisateur implements UserDetails {
+public class Utilisateur implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -84,7 +80,7 @@ public class Utilisateur implements UserDetails {
         this.credentialsNonExpired = true;
         this.enabled = true;
         this.roles = new HashSet<>();
-        this.roles.add(RoleEnum.ROLE_USER);
+        this.roles.add(RoleEnum.USER);
     }
 
     public Utilisateur(String username, String password, String firstname, String lastname, String email, Set<RoleEnum> roles) {
@@ -162,47 +158,40 @@ public class Utilisateur implements UserDetails {
         this.enabled = enabled;
     }
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        String roles = StringUtils.collectionToCommaDelimitedString(getRoles().stream()
-                .map(Enum::name).collect(Collectors.toList()));
-        return AuthorityUtils.commaSeparatedStringToAuthorityList(roles);
+    public void grantAuthority() {
+        if ( roles == null ) roles = new HashSet<>();
+        roles.add(RoleEnum.USER);
     }
 
-    @Override
-    public String getPassword() {
-        return password;
-    }
-
-    @Override
-    public String getUsername() {
-        return username;
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return accountNonExpired;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return accountNonLocked;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return credentialsNonExpired;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return enabled;
-    }
 
     public void setPassword(String password) {
         if (!password.isEmpty()) {
             this.password = BCryptManagerUtil.passwordencoder().encode(password);
         }
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public boolean isAccountNonExpired() {
+        return accountNonExpired;
+    }
+
+    public boolean isAccountNonLocked() {
+        return accountNonLocked;
+    }
+
+    public boolean isCredentialsNonExpired() {
+        return credentialsNonExpired;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
     }
 
     @Override

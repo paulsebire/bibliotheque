@@ -1,8 +1,11 @@
 package com.clientui.controller;
 
 import com.clientui.beans.BookBean;
+import com.clientui.beans.UtilisateurBean;
 import com.clientui.proxies.MicroserviceBooksProxy;
 
+import com.clientui.proxies.MicroserviceUtilisateurProxy;
+import com.netflix.discovery.converters.Auto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +27,8 @@ public class ClientController {
 
     @Autowired
     private MicroserviceBooksProxy booksProxy;
+    @Autowired
+    private MicroserviceUtilisateurProxy utilisateurProxy;
 
     /*
     * Étape (1)
@@ -52,6 +57,13 @@ public class ClientController {
         //model.addAttribute("nbCopies",);
         log.trace("Récupération de la fiche d'un livre");
         return "FicheLivre";
+    }
+
+    @GetMapping("/users")
+    public String allUsers(Model model){
+        List<UtilisateurBean> userList= utilisateurProxy.utilisateurList();
+        model.addAttribute("userList",userList);
+        return "users";
     }
 
 

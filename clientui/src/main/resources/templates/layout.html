@@ -53,7 +53,7 @@
                 </li>
 
                 <li  class="nav-item active" th:if="${#request.userPrincipal == null}">
-                    <a class="nav-link" th:href="@{/login}" th:inline="text"><i class="fa fa-user-circle"></i>  Connexion </a>
+                    <a class="nav-link" th:href="@{/connexion}" th:inline="text"><i class="fa fa-user-circle"></i>  Connexion </a>
                 </li>
                 <li  class="nav-item active" th:if="${#request.userPrincipal != null}">
                     <a class="nav-link" th:href="@{/logout}" onclick="return confirm('Etes vous sûr de vouloir vous déconnecter')" th:inline="text">
