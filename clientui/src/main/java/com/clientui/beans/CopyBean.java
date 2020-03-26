@@ -5,7 +5,7 @@ package com.clientui.beans;
 public class CopyBean {
     private Long id;
     private String serialNumber;
-
+    private BookBean book;
 
     public CopyBean() {
     }
@@ -26,6 +26,13 @@ public class CopyBean {
         this.serialNumber = serialNumber;
     }
 
+    public BookBean getBook() {
+        return book;
+    }
+
+    public void setBook(BookBean book) {
+        this.book = book;
+    }
 
     @Override
     public String toString() {

@@ -6,6 +6,7 @@ import com.books.entities.Reservation;
 import com.books.web.exceptions.ReservationNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -16,9 +17,9 @@ public class ReservationController {
     @Autowired
     private ReservationRepository reservationRepository;
 
-    @GetMapping(value = "/reservations")
-    public List<Reservation> reservationList(){
-        List<Reservation> reservations = reservationRepository.findAll();
+    @GetMapping(value = "/utilisateur/{id}/reservations/")
+    public List<Reservation> reservationList(@PathVariable(value = "id")Long id){
+        List<Reservation> reservations = reservationRepository.findAllByIdUtilisateur(id);
         if (reservations.isEmpty()) throw new ReservationNotFoundException("Aucune reservation n'est disponible");
         return reservations;
     }

@@ -1,11 +1,13 @@
 package com.books;
 
+import com.books.beans.UtilisateurBean;
 import com.books.dao.BookRepository;
 import com.books.dao.CopiesRepository;
 import com.books.dao.ReservationRepository;
 import com.books.entities.Book;
 import com.books.entities.Copy;
 import com.books.entities.Reservation;
+import com.books.poxies.MicroserviceUtilisateurProxy;
 import com.books.services.BibliServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
@@ -30,6 +32,8 @@ public class BooksApplication {
 	private BookRepository bookRepository;
 	@Autowired
 	private CopiesRepository copiesRepository;
+	@Autowired
+	private MicroserviceUtilisateurProxy microserviceUtilisateurProxy;
 
 	public static void main(String[] args) {
 		SpringApplication.run(BooksApplication.class, args);
@@ -107,24 +111,32 @@ public class BooksApplication {
 			Copy copy18 = new Copy("SN003", book6);
 			copiesRepository.save(copy18);
 
+			UtilisateurBean admin = microserviceUtilisateurProxy.utilisateurByUsername("admin");
+			UtilisateurBean user = microserviceUtilisateurProxy.utilisateurByUsername("user");
+
 			Reservation resa1 = new Reservation(copy1, new Date());
 			resa1.setDateRetour(bibliService.ajouter4semaines(resa1.getDateEmprunt()));
+			resa1.setIdUtilisateur(admin.getIdUser());
 			reservationRepository.save(resa1);
 
 			Reservation resa2 = new Reservation(copy8, new Date());
 			resa2.setDateRetour(bibliService.ajouter4semaines(resa2.getDateEmprunt()));
+			resa2.setIdUtilisateur(admin.getIdUser());
 			reservationRepository.save(resa2);
 
 			Reservation resa3 = new Reservation(copy10, new Date());
 			resa3.setDateRetour(bibliService.ajouter4semaines(resa3.getDateEmprunt()));
+			resa3.setIdUtilisateur(admin.getIdUser());
 			reservationRepository.save(resa3);
 
 			Reservation resa4 = new Reservation(copy14, new Date());
 			resa4.setDateRetour(bibliService.ajouter4semaines(resa4.getDateEmprunt()));
+			resa4.setIdUtilisateur(user.getIdUser());
 			reservationRepository.save(resa4);
 
 			Reservation resa5 = new Reservation(copy18, new Date());
 			resa5.setDateRetour(bibliService.ajouter4semaines(resa5.getDateEmprunt()));
+			resa5.setIdUtilisateur(user.getIdUser());
 			reservationRepository.save(resa5);
 
 

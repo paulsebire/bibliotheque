@@ -1,6 +1,7 @@
 package com.clientui.proxies;
 
 import com.clientui.beans.BookBean;
+import com.clientui.beans.ReservationBean;
 import com.clientui.configuration.FeignConfig;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Component;
@@ -20,10 +21,12 @@ public interface MicroserviceBooksProxy {
 
 
     @GetMapping( value = "/microservice-books/livre/{id}")
-    BookBean recupererUnLivre(@PathVariable("id") int id);
+    BookBean recupererUnLivre(@PathVariable("id") Long id);
 
 
     @GetMapping(value = "/microservice-books/livre/{id}/copies")
-    int nombreDeCopiesDispo(@PathVariable("id") int id);
+    int nombreDeCopiesDispo(@PathVariable("id") Long id);
 
+    @GetMapping(value = "/microservice-books/utilisateur/{id}/reservations/")
+    public List<ReservationBean> reservationList(@PathVariable(value = "id")Long id);
 }

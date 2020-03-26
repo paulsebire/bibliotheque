@@ -1,6 +1,7 @@
 package com.clientui.controller;
 
 import com.clientui.beans.BookBean;
+import com.clientui.beans.ReservationBean;
 import com.clientui.beans.UtilisateurBean;
 import com.clientui.proxies.MicroserviceBooksProxy;
 
@@ -9,6 +10,7 @@ import com.netflix.discovery.converters.Auto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -50,7 +52,7 @@ public class ClientController {
     * On passe l'objet "produit" récupéré et qui contient les détails en question à  FicheProduit.html
     * */
     @GetMapping("/fiche-livre/{id}")
-    public String ficheLivre(@PathVariable int id,  Model model){
+    public String ficheLivre(@PathVariable Long id,  Model model){
 
         BookBean livre = booksProxy.recupererUnLivre(id);
         model.addAttribute("livre", livre);
@@ -64,6 +66,14 @@ public class ClientController {
         List<UtilisateurBean> userList= utilisateurProxy.utilisateurList();
         model.addAttribute("userList",userList);
         return "users";
+    }
+
+    @GetMapping("/MonProfile")
+    public String monProfile (Model model){
+        UtilisateurBean utilisateur = (UtilisateurBean) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        List<ReservationBean> reservations = booksProxy.reservationList(utilisateur.getIdUser());
+        model.addAttribute("reservations",reservations);
+        return "MonProfile";
     }
 
 

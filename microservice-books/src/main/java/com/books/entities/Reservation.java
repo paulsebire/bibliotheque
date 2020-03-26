@@ -1,9 +1,12 @@
 package com.books.entities;
 
+import com.books.beans.UtilisateurBean;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
 
 @Entity
@@ -12,13 +15,15 @@ public class Reservation {
     @Column(name = "id_reservation")
     private Long id;
 
+    private Long idUtilisateur;
     private Date dateEmprunt;
     private Date dateRetour;
     private boolean prolonger=false;
-    @JsonManagedReference
+
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name ="ID_COPY" )
-    private Copy copy;
+    public Copy copy;
 
     public Reservation() {
         super();
@@ -38,6 +43,13 @@ public class Reservation {
         this.id = id;
     }
 
+    public Long getIdUtilisateur() {
+        return idUtilisateur;
+    }
+
+    public void setIdUtilisateur(Long idUtilisateur) {
+        this.idUtilisateur = idUtilisateur;
+    }
 
     public Date getDateEmprunt() {
         return dateEmprunt;

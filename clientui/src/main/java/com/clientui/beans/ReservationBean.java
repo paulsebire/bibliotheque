@@ -11,7 +11,7 @@ public class ReservationBean {
     private Date dateEmprunt;
     private Date dateRetour;
     private boolean prolonger=false;
-
+    private CopyBean copy;
 
     public ReservationBean() {
     }
@@ -48,6 +48,13 @@ public class ReservationBean {
         this.prolonger = prolonger;
     }
 
+    public CopyBean getCopy() {
+        return copy;
+    }
+
+    public void setCopy(CopyBean copy) {
+        this.copy = copy;
+    }
 
     @Override
     public String toString() {

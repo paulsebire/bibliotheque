@@ -11,16 +11,17 @@ import java.util.Collection;
 public class Copy{
     @Id @GeneratedValue
     @Column(name = "id_copy")
-    private Long id;
+    public Long id;
 
-    private String serialNumber;
+    public String serialNumber;
     @JsonBackReference
     @ManyToOne
     @JoinColumn(name ="id" )
-    private Book book;
-    @JsonBackReference
-    @OneToMany(mappedBy = "copy",fetch = FetchType.LAZY, cascade = CascadeType.ALL )
-    private Collection<Reservation> reservation;
+    public Book book;
+
+    @JsonManagedReference
+    @OneToMany(mappedBy = "copy",fetch = FetchType.EAGER, cascade = CascadeType.ALL )
+    public Collection<Reservation> reservations;
 
     public Copy() { super();}
 
@@ -34,11 +35,11 @@ public class Copy{
     }
 
     public Collection<Reservation> getReservation() {
-        return reservation;
+        return reservations;
     }
 
-    public void setReservation(Collection<Reservation> reservation) {
-        this.reservation = reservation;
+    public void setReservation(Collection<Reservation> reservations) {
+        this.reservations = reservations;
     }
 
     public void setId(Long id) {
@@ -67,7 +68,7 @@ public class Copy{
                 "id=" + id +
                 ", serialNumber='" + serialNumber + '\'' +
                 ", book=" + book +
-                ", reservation=" + reservation +
+                ", reservations=" + reservations +
                 '}';
     }
 }
