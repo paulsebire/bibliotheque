@@ -6,28 +6,30 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.Set;
 
 
 @Entity
 public class Copy{
     @Id @GeneratedValue
     @Column(name = "id_copy")
-    public Long id;
-
-    public String serialNumber;
-    @JsonBackReference
+    private Long id;
+    private boolean dispo;
+    private String serialNumber;
+    @JsonManagedReference
     @ManyToOne
     @JoinColumn(name ="id" )
-    public Book book;
+    private Book book;
 
     @JsonIgnore
     @OneToMany(mappedBy = "copy",fetch = FetchType.EAGER, cascade = CascadeType.ALL )
-    public Collection<Reservation> reservations;
+    private Set<Reservation> reservations;
 
     public Copy() { super();}
 
     public Copy(String serialNumber, Book book) {
         this.serialNumber = serialNumber;
+        this.dispo=true;
         this.book = book;
     }
 
@@ -35,16 +37,24 @@ public class Copy{
         return id;
     }
 
-    public Collection<Reservation> getReservation() {
+    public Set<Reservation> getReservations() {
         return reservations;
     }
 
-    public void setReservation(Collection<Reservation> reservations) {
+    public void setReservations(Set<Reservation> reservations) {
         this.reservations = reservations;
     }
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public boolean isDispo() {
+        return dispo;
+    }
+
+    public void setDispo(boolean dispo) {
+        this.dispo = dispo;
     }
 
     public String getSerialNumber() {

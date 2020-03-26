@@ -8,5 +8,5 @@ import java.util.List;
 
 public interface CopiesRepository extends JpaRepository<Copy, Long> {
 
-    public List<Copy> findCopiesByBook_Id(Long id);
+    public List<Copy> findCopiesByBook_IdAndDispoTrue(Long id);
 }

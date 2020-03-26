@@ -18,9 +18,9 @@ public class CopyController {
     private CopiesRepository copiesRepository;
 
     @GetMapping(value = "/livre/{id}/copies")
-    public int nombreDeCopiesDispo(@PathVariable(value = "id")Long id){
-        List<Copy> copies = copiesRepository.findCopiesByBook_Id(id);
+    public List CopiesDispo(@PathVariable(value = "id")Long id){
+        List<Copy> copies = copiesRepository.findCopiesByBook_IdAndDispoTrue(id);
         if (copies.isEmpty()) throw new CopyNotFoundException("Aucune Copie du livre n'est disponible");
-        return copies.size();
+        return copies;
     }
 }

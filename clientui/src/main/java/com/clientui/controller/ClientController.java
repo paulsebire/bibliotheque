@@ -1,6 +1,7 @@
 package com.clientui.controller;
 
 import com.clientui.beans.BookBean;
+import com.clientui.beans.CopyBean;
 import com.clientui.beans.ReservationBean;
 import com.clientui.beans.UtilisateurBean;
 import com.clientui.proxies.MicroserviceBooksProxy;
@@ -55,8 +56,9 @@ public class ClientController {
     public String ficheLivre(@PathVariable Long id,  Model model){
 
         BookBean livre = booksProxy.recupererUnLivre(id);
+        List<CopyBean> copies = booksProxy.CopiesDispo(id);
         model.addAttribute("livre", livre);
-        //model.addAttribute("nbCopies",);
+        model.addAttribute("copies",copies);
         log.trace("Récupération de la fiche d'un livre");
         return "FicheLivre";
     }
@@ -76,5 +78,11 @@ public class ClientController {
         return "MonProfile";
     }
 
-
+    @GetMapping("/reservation/{id}/prolonger")
+    public String prolongerResa(@PathVariable(value = "id")Long id){
+        UtilisateurBean utilisateur = (UtilisateurBean) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        System.out.println("user"+utilisateur);
+        booksProxy.prolongerReservation(id,utilisateur.getIdUser());
+        return "redirect:/MonProfile";
+    }
 }

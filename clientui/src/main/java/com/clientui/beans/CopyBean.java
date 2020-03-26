@@ -1,12 +1,14 @@
 package com.clientui.beans;
 
 
+import java.util.Set;
 
 public class CopyBean {
     private Long id;
     private String serialNumber;
     private BookBean book;
-
+    private Set<ReservationBean> reservations;
+    private boolean dispo;
     public CopyBean() {
     }
 
@@ -28,6 +30,22 @@ public class CopyBean {
 
     public BookBean getBook() {
         return book;
+    }
+
+    public boolean isDispo() {
+        return dispo;
+    }
+
+    public void setDispo(boolean dispo) {
+        this.dispo = dispo;
+    }
+
+    public Set<ReservationBean> getReservations() {
+        return reservations;
+    }
+
+    public void setReservations(Set<ReservationBean> reservations) {
+        this.reservations = reservations;
     }
 
     public void setBook(BookBean book) {

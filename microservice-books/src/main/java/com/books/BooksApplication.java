@@ -110,31 +110,40 @@ public class BooksApplication {
 			Copy copy18 = new Copy("SN003", book6);
 			copiesRepository.save(copy18);
 
-
-
+			
 			Reservation resa1 = new Reservation(copy1, new Date());
 			resa1.setDateRetour(bibliService.ajouter4semaines(resa1.getDateEmprunt()));
 			resa1.setIdUtilisateur(3L);
+			copy1.setDispo(false);
+			copiesRepository.save(copy1);
 			reservationRepository.save(resa1);
 
 			Reservation resa2 = new Reservation(copy8, new Date());
 			resa2.setDateRetour(bibliService.ajouter4semaines(resa2.getDateEmprunt()));
 			resa2.setIdUtilisateur(3L);
+			copy8.setDispo(false);
+			copiesRepository.save(copy8);
 			reservationRepository.save(resa2);
 
 			Reservation resa3 = new Reservation(copy10, new Date());
 			resa3.setDateRetour(bibliService.ajouter4semaines(resa3.getDateEmprunt()));
 			resa3.setIdUtilisateur(3L);
+			copy10.setDispo(false);
+			copiesRepository.save(copy10);
 			reservationRepository.save(resa3);
 
 			Reservation resa4 = new Reservation(copy14, new Date());
 			resa4.setDateRetour(bibliService.ajouter4semaines(resa4.getDateEmprunt()));
 			resa4.setIdUtilisateur(1L);
+			copy14.setDispo(false);
+			copiesRepository.save(copy14);
 			reservationRepository.save(resa4);
 
 			Reservation resa5 = new Reservation(copy18, new Date());
 			resa5.setDateRetour(bibliService.ajouter4semaines(resa5.getDateEmprunt()));
 			resa5.setIdUtilisateur(1L);
+			copy18.setDispo(false);
+			copiesRepository.save(copy18);
 			reservationRepository.save(resa5);
 
 

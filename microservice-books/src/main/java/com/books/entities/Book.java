@@ -15,7 +15,8 @@ public class Book{
     private String name;
     private String author;
     private String coverUrl;
-    @JsonManagedReference
+
+    @JsonBackReference
     @OneToMany(mappedBy = "book",fetch = FetchType.EAGER, cascade = CascadeType.ALL )
     private List<Copy> copies;
 
