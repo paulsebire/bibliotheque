@@ -34,18 +34,8 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav">
-                <li class="nav-item" th:classappend="${#httpServletRequest.getRequestURI() == '/site/search' ? 'active':''}">
-                    <a class="nav-link" th:href="@{/site/search}" ><i class="fa fa-search"></i>  Trouver site</a>
-                </li>
-                <li class="nav-item" sec:authorize="hasRole('ROLE_USER')" th:classappend="${#httpServletRequest.getRequestURI() == '/site/add' ? 'active':''}">
-                    <a class="nav-link" th:href="@{/site/add}"
-                       th:if="${#request.userPrincipal != null}"><i class="fa fa-plus"></i>  Ajouter site</a>
-                </li>
-                <li class="nav-item" sec:authorize="hasRole('ROLE_USER')" th:classappend="${#httpServletRequest.getRequestURI() == '/topo/search' ? 'active':''}">
-                    <a class="nav-link" th:href="@{/topo/search}"><i class="fa fa-search"></i>  Trouver Topo</a>
-                </li>
-                <li class="nav-item" sec:authorize="hasRole('ROLE_USER')" th:classappend="${#httpServletRequest.getRequestURI().contains('/utilisateur/profil/') ? 'active':''}">
-                    <a class="nav-link" th:href="@{/utilisateur/profil/topos}" th:if="${#request.userPrincipal != null}"
+                <li class="nav-item"  th:classappend="${#httpServletRequest.getRequestURI().contains('/MonProfile') ? 'active':''}">
+                    <a class="nav-link" th:href="@{/MonProfile}" th:if="${#request.userPrincipal != null}"
                         ><i class="fa fa-user"></i>  [[${#httpServletRequest.remoteUser}]]</a>
                 </li>
                 <li class="nav-item" sec:authorize="hasRole('ROLE_ADMIN')" th:classappend="${#httpServletRequest.getRequestURI() == '/administration'? 'active':''}" >

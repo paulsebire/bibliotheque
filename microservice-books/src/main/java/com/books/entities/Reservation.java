@@ -23,7 +23,7 @@ public class Reservation {
     @JsonBackReference
     @ManyToOne
     @JoinColumn(name ="ID_COPY" )
-    public Copy copy;
+    private Copy copy;
 
     public Reservation() {
         super();

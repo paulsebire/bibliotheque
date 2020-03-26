@@ -10,8 +10,8 @@
         <module name="eureka-server" />
         <module name="config-server" />
         <module name="microservice-utilisateur" />
-        <module name="zuulserver" />
         <module name="clientui" />
+        <module name="zuul-server" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -24,7 +24,7 @@
       <module name="mBooks" target="1.8" />
       <module name="microservice-books" target="1.8" />
       <module name="microservice-utilisateur" target="1.8" />
-      <module name="zuul-server" target="11" />
+      <module name="zuul-server" target="1.8" />
       <module name="zuulserver" target="1.8" />
     </bytecodeTargetLevel>
   </component>

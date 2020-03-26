@@ -24,8 +24,8 @@ public class UtilisateurController {
     }
 
     @GetMapping("/utilisateur/{username}")
-    public Utilisateur utilisateurByPseudo (@PathVariable String username){
-        Utilisateur utilisateur  = utilisateurRepository.findByUsername(username);
+    public Utilisateur utilisateurByUsername (@PathVariable String username){
+        Utilisateur utilisateur  = utilisateurRepository.findByUsername(username.toLowerCase());
         return utilisateur;
     }
 
