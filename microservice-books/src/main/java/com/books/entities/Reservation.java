@@ -20,7 +20,6 @@ public class Reservation {
     private Date dateRetour;
     private boolean prolonger=false;
 
-    @JsonBackReference
     @ManyToOne
     @JoinColumn(name ="ID_COPY" )
     private Copy copy;

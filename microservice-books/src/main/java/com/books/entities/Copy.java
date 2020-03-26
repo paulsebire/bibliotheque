@@ -1,6 +1,7 @@
 package com.books.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
@@ -19,7 +20,7 @@ public class Copy{
     @JoinColumn(name ="id" )
     public Book book;
 
-    @JsonManagedReference
+    @JsonIgnore
     @OneToMany(mappedBy = "copy",fetch = FetchType.EAGER, cascade = CascadeType.ALL )
     public Collection<Reservation> reservations;
 
