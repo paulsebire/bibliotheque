@@ -10,5 +10,5 @@ import java.util.List;
 
 public interface ReservationRepository extends JpaRepository<Reservation, Long> {
 
-public List<Reservation> findAllByIdUtilisateur(long idUser);
+public List<Reservation> findAllByIdUtilisateurOrderByIdAsc(long idUser);
 }

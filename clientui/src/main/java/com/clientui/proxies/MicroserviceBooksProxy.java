@@ -29,6 +29,6 @@ public interface MicroserviceBooksProxy {
     @GetMapping(value = "/microservice-books/utilisateur/{id}/reservations/")
     List<ReservationBean> reservationList(@PathVariable(value = "id")Long id);
 
-    @PostMapping(value = "/microservice-books/reservations/{id}/prolonger")
-    void prolongerReservation(@PathVariable(value = "id")Long id, Long idUtilisateur);
+    @PostMapping(value = "/microservice-books/utilisateur/{idUser}/reservations/{idResa}/prolonger")
+    void prolongerReservation(@PathVariable(value = "idResa")Long idResa,@PathVariable(value = "idUser") Long idUser);
 }

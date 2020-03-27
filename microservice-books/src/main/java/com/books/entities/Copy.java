@@ -78,8 +78,6 @@ public class Copy{
         return "Copy{" +
                 "id=" + id +
                 ", serialNumber='" + serialNumber + '\'' +
-                ", book=" + book +
-                ", reservations=" + reservations +
                 '}';
     }
 }
