@@ -19,7 +19,7 @@ public class Reservation {
     private Date dateEmprunt;
     private Date dateRetour;
     private boolean prolonger=false;
-
+    private boolean cloturer=false;
     @ManyToOne
     @JoinColumn(name ="ID_COPY" )
     private Copy copy;
@@ -31,6 +31,7 @@ public class Reservation {
     public Reservation(Copy copy, Date dateEmprunt) {
         this.dateEmprunt=dateEmprunt;
         this.prolonger=false;
+        this.cloturer=false;
         this.copy=copy;
     }
 
@@ -52,6 +53,14 @@ public class Reservation {
 
     public Date getDateEmprunt() {
         return dateEmprunt;
+    }
+
+    public boolean isCloturer() {
+        return cloturer;
+    }
+
+    public void setCloturer(boolean cloturer) {
+        this.cloturer = cloturer;
     }
 
     public void setDateEmprunt(Date dateEmprunt) {

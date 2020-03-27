@@ -40,7 +40,7 @@ public class ConnexionController {
         model.addAttribute("errorMessge", errorMessage);
 
         if(!(auth instanceof AnonymousAuthenticationToken)) {
-            return new ModelAndView("redirect:/");
+            return new ModelAndView("redirect:/MonProfile");
         }
         return new ModelAndView("connexion");
     }

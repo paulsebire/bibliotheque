@@ -12,7 +12,7 @@ public class ReservationBean {
     private Date dateRetour;
     private boolean prolonger=false;
     private CopyBean copy;
-
+    private boolean cloturer;
     public ReservationBean() {
     }
 
@@ -42,6 +42,14 @@ public class ReservationBean {
 
     public boolean isProlonger() {
         return prolonger;
+    }
+
+    public boolean isCloturer() {
+        return cloturer;
+    }
+
+    public void setCloturer(boolean cloturer) {
+        this.cloturer = cloturer;
     }
 
     public void setProlonger(boolean prolonger) {

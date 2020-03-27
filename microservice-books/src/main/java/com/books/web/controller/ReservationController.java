@@ -32,7 +32,7 @@ public class ReservationController {
 
     @GetMapping(value = "/utilisateur/{id}/reservations/")
     public List<Reservation> reservationList(@PathVariable(value = "id")Long id){
-        List<Reservation> reservations = reservationRepository.findAllByIdUtilisateurOrderByIdAsc(id);
+        List<Reservation> reservations = reservationRepository.findAllByIdUtilisateurAndCloturerFalseOrderByIdAsc(id);
         if (reservations.isEmpty()) throw new ReservationNotFoundException("Aucune reservation n'est disponible");
         return reservations;
     }
@@ -61,6 +61,22 @@ public class ReservationController {
                 Reservation reservation=new Reservation(copy,new Date());
                 reservation.setIdUtilisateur(idUser);
                 copy.setDispo(false);
+                copiesRepository.save(copy);
+                reservationRepository.save(reservation);
+                return "ok";
+            }
+        }return "Not ok";
+    }
+
+    @PostMapping(value = "/reservation/{idResa}/cloturer")
+    String cloturerReservation(@PathVariable(value = "idResa")Long idResa){
+        Reservation reservation= reservationRepository.findById(idResa).get();
+
+        if (reservation!=null){
+            if (!reservation.isCloturer()){
+                Copy copy = copiesRepository.findById(reservation.getCopy().getId()).get();
+                reservation.setCloturer(true);
+                copy.setDispo(true);
                 copiesRepository.save(copy);
                 reservationRepository.save(reservation);
                 return "ok";

@@ -20,6 +20,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 import javax.annotation.PostConstruct;
 import java.util.Date;
@@ -27,6 +28,7 @@ import java.util.Date;
 @SpringBootApplication
 @EnableFeignClients("com.books")
 @EnableDiscoveryClient
+@EnableScheduling
 public class BooksApplication {
 
 	@Autowired

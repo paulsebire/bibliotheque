@@ -5,6 +5,7 @@ import org.springframework.batch.core.JobParameters;
 import org.springframework.batch.core.JobParametersBuilder;
 import org.springframework.batch.core.launch.JobLauncher;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -17,11 +18,12 @@ public class BatchJob {
     @Autowired
     Job job;
 
+
     /**
      * Programmation de la relance par mail tous les jours, heure réglable dans le bootstap.properties du microservice
      * @throws Exception
      */
-    @Scheduled(cron = "${microservice.config.cron.job}")
+    @Scheduled(cron = "*/10 * * * * *" )
     public void lendingRevival() throws Exception
     {
         JobParameters params = new JobParametersBuilder()
