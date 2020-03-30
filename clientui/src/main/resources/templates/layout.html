@@ -36,14 +36,16 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav">
+                <li>
+                    <form class="form-inline ml-auto" th:action="@{/}">
+                        <!--/*@thymesVar id="mc" type="java.lang.String"*/-->
+                        <input class="form-control" type="text" placeholder="Recherche..." aria-label="Recherche" name="mc" th:value="${mc}">
+                    </form>
+                </li>
                 <li class="nav-item"  th:classappend="${#httpServletRequest.getRequestURI().contains('/MonProfile') ? 'active':''}">
                     <a class="nav-link" th:href="@{/MonProfile}" th:if="${#request.userPrincipal != null}"
-                        ><i class="fa fa-user"></i>  [[${#httpServletRequest.remoteUser}]]</a>
+                    ><i class="fa fa-user"></i>  [[${#httpServletRequest.remoteUser}]]</a>
                 </li>
-                <li class="nav-item" sec:authorize="hasRole('ROLE_ADMIN')" th:classappend="${#httpServletRequest.getRequestURI() == '/administration'? 'active':''}" >
-                    <a class="nav-link" th:href="@{/administration}" ><i class="fa fa-users"></i>  Administration</a>
-                </li>
-
                 <li  class="nav-item active" th:if="${#request.userPrincipal == null}">
                     <a class="nav-link" th:href="@{/connexion}" th:inline="text"><i class="fa fa-user-circle"></i>  Connexion </a>
                 </li>
@@ -51,6 +53,8 @@
                     <a class="nav-link" th:href="@{/logout}" onclick="return confirm('Etes vous sûr de vouloir vous déconnecter')" th:inline="text">
                         <i class="fas fa-user-slash"></i>  Déconnexion </a>
                 </li>
+
+
             </ul>
 
         </div>

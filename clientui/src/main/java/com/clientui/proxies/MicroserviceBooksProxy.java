@@ -5,10 +5,7 @@ import com.clientui.beans.ReservationBean;
 import com.clientui.configuration.FeignConfig;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -18,7 +15,7 @@ import java.util.List;
 public interface MicroserviceBooksProxy {
 
     @GetMapping(value = "/microservice-books/livres")
-    List<BookBean> bookList();
+    List<BookBean> bookList(@RequestParam(name = "mc", defaultValue = "")String mc);
 
     @GetMapping( value = "/microservice-books/livre/{id}")
     BookBean recupererUnLivre(@PathVariable("id") Long id);

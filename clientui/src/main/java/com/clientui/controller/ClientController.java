@@ -17,6 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.*;
 
@@ -40,9 +41,19 @@ public class ClientController {
     * On fini par rentourner la page Accueil.html à laquelle on passe la liste d'objets "produits" récupérés.
     * */
     @GetMapping("/")
-    public String accueil(Model model){
-        List<BookBean> livres =  booksProxy.bookList();
+    public String accueil(Model model,@RequestParam(name = "mc", defaultValue = "")String mc){
+        List<BookBean> livres =  booksProxy.bookList(mc);
         model.addAttribute("livres", livres);
+        model.addAttribute("mc",mc);
+        log.info("Récupération de la liste des livres");
+        return "Accueil";
+    }
+
+    @GetMapping("/find")
+    public String rechercher(Model model,@RequestParam(name = "mc", defaultValue = "")String mc){
+        List<BookBean> livres =  booksProxy.bookList(mc);
+        model.addAttribute("livres", livres);
+        model.addAttribute("mc",mc);
         log.info("Récupération de la liste des livres");
         return "Accueil";
     }

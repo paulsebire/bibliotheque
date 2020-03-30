@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -19,9 +20,8 @@ public class BookController {
     private BookRepository bookRepository;
 
     @GetMapping(value = "/livres")
-    public List<Book> bookList(){
-        List<Book> books = bookRepository.findAll();
-        if (books.isEmpty()) throw new BookNotFoundException("Aucun livre n'est disponible");
+    public List<Book> bookList(@RequestParam(name = "mc", defaultValue = "")String mc){
+        List<Book> books = bookRepository.chercherParTitre("%"+mc+"%");
         return books;
     }
 
