@@ -27,7 +27,7 @@
     <div class="container">
         <h1 class="text-center" >Application Bibiotheque</h1>
 
-        <div class="row" th:if="${livres.size()>0}">
+        <div class="row spacer" th:if="${livres.size()>0}">
             <div th:each="livre : ${livres}" class="col-md-3 my-1">
                 <a th:href="@{|/fiche-livre/${livre.id}|}" >
                 <img th:src="${livre.coverUrl}"  class="card-img-top" width="200" height="350" /></a>
@@ -35,8 +35,9 @@
                 <p th:text= "${livre.author}"></p>
             </div>
         </div>
-        <div th:if="${livres.size()==0}">
-            <p>Aucun résultat ne correspond à votre recherche</p>
+        <div class="spacer" th:if="${livres.size()==0}">
+            <br/>
+            <h2>Aucun résultat ne correspond à votre recherche<h2/>
         </div>
     </div>
 </body>

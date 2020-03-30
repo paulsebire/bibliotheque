@@ -27,9 +27,9 @@ layout:decorate="~{layout}">
 
 <div class="container">
     <h1 class="text-center" th:text="${livre.name}"></h1>
-    <div class="row">
-        <div class="col-md-4 mx-auto mt-5 text-center">
-            <img th:src="${livre.coverUrl}" class="card-img-top"/>
+    <div>
+        <div class="col-md-4 mx-auto text-center">
+            <img th:src="${livre.coverUrl}" class="card-img-top" width="200" height="350"/>
             <p th:text="${livre.author}" class="font-weight-bold"></p>
             <p>Nombre de copie disponibles:<span th:text="${copies.size()}"></span></p>
         </div>

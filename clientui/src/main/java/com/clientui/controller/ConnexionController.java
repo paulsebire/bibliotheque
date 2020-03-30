@@ -1,7 +1,10 @@
 package com.clientui.controller;
 
+import com.clientui.beans.BookBean;
+import com.clientui.proxies.MicroserviceBooksProxy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -15,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 
 @RestController
@@ -22,6 +26,8 @@ public class ConnexionController {
 
     Logger logger = LoggerFactory.getLogger(this.getClass());
 
+    @Autowired
+    private MicroserviceBooksProxy booksProxy;
 
     @GetMapping(value = "/connexion")
     public ModelAndView loginGet(Model model,
@@ -47,12 +53,14 @@ public class ConnexionController {
 
 
     @RequestMapping("/logout")
-    public String logoutPage (HttpServletRequest request, HttpServletResponse response) {
+    public ModelAndView logoutPage (HttpServletRequest request, HttpServletResponse response,Model model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (auth != null){
             new SecurityContextLogoutHandler().logout(request, response, auth);
         }
-        return "redirect:/login?logout=true";
+        List<BookBean> livres =  booksProxy.bookList("");
+        model.addAttribute("livres",livres);
+        return new ModelAndView("Accueil");
     }
 
 }

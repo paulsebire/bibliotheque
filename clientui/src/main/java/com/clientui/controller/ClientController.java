@@ -49,14 +49,6 @@ public class ClientController {
         return "Accueil";
     }
 
-    @GetMapping("/find")
-    public String rechercher(Model model,@RequestParam(name = "mc", defaultValue = "")String mc){
-        List<BookBean> livres =  booksProxy.bookList(mc);
-        model.addAttribute("livres", livres);
-        model.addAttribute("mc",mc);
-        log.info("Récupération de la liste des livres");
-        return "Accueil";
-    }
 
     /*
     * Étape (2)
@@ -68,6 +60,7 @@ public class ClientController {
 
         BookBean livre = booksProxy.recupererUnLivre(id);
         List<CopyBean> copies = booksProxy.CopiesDispo(id);
+        System.out.println("copies"+copies);
         model.addAttribute("livre", livre);
         model.addAttribute("copies",copies);
         log.trace("Récupération de la fiche d'un livre");

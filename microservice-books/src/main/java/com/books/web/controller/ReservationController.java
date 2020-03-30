@@ -9,6 +9,8 @@ import com.books.poxies.MicroserviceUtilisateurProxy;
 import com.books.services.BibliServiceImpl;
 import com.books.web.exceptions.ReservationNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -53,19 +55,21 @@ public class ReservationController {
     }
 
     @PostMapping(value = "/utilisateur/{idUser}/copie/{idCopy}/reserver")
-     String reserverCopy(@PathVariable(value = "idUser")Long idUser,@PathVariable(value = "idCopy")Long idCopy){
-        Copy copy= copiesRepository.findById(idCopy).get();
+     ResponseEntity reserverCopy(@PathVariable(value = "idUser")Long idUser,@PathVariable(value = "idCopy")Long idCopy){
 
-        if (copy!=null){
+        Optional<Copy> c   = copiesRepository.findById(idCopy);
+
+        if (c.isPresent()){
+             Copy copy=c.get();
             if (copy.isDispo()){
                 Reservation reservation=new Reservation(copy,new Date());
                 reservation.setIdUtilisateur(idUser);
                 copy.setDispo(false);
                 copiesRepository.save(copy);
                 reservationRepository.save(reservation);
-                return "ok";
+                return new ResponseEntity<>("reservation effectué", HttpStatus.OK);
             }
-        }return "Not ok";
+        }return new ResponseEntity<>("reservation introuvable", HttpStatus.BAD_REQUEST);
     }
 
     @PostMapping(value = "/reservation/{idResa}/cloturer")
