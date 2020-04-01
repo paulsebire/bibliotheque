@@ -3,9 +3,11 @@ package com.books;
 import com.books.beans.UtilisateurBean;
 import com.books.dao.BookRepository;
 import com.books.dao.CopiesRepository;
+import com.books.dao.EmailRepository;
 import com.books.dao.ReservationRepository;
 import com.books.entities.Book;
 import com.books.entities.Copy;
+import com.books.entities.Email;
 import com.books.entities.Reservation;
 import com.books.poxies.MicroserviceUtilisateurProxy;
 import com.books.services.BibliServiceImpl;
@@ -39,6 +41,8 @@ public class BooksApplication {
 	private BookRepository bookRepository;
 	@Autowired
 	private CopiesRepository copiesRepository;
+	@Autowired
+	private EmailRepository emailRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(BooksApplication.class, args);
@@ -151,8 +155,18 @@ public class BooksApplication {
 			copiesRepository.save(copy18);
 			reservationRepository.save(resa5);
 
+		Email email = new Email();
+		email.setName("relance");
+		email.setObjet("relance pour livre non rendu");
+		email.setContenu("Bonjour, \n "+
+				"\n"+
+				"\tVous deviez rendre le livre [LIVRE_TITRE] à la blibliothèque au plus tard à la date : [DATE_FIN].\n" +
+				"à ce jour nous n'avons toujours pas enregistré le retour de ce livre.\n" +
+				"Nous vous invitons à régulariser la situation dès à présent.\n" +
+				"\n"+
+				"Cordialement.");
 
-
+		emailRepository.save(email);
 	}
 
 

@@ -63,6 +63,7 @@ public class ReservationController {
              Copy copy=c.get();
             if (copy.isDispo()){
                 Reservation reservation=new Reservation(copy,new Date());
+                reservation.setDateRetour(bibliService.ajouter4semaines(reservation.getDateEmprunt()));
                 reservation.setIdUtilisateur(idUser);
                 copy.setDispo(false);
                 copiesRepository.save(copy);
@@ -73,7 +74,8 @@ public class ReservationController {
     }
 
     @PostMapping(value = "/reservation/{idResa}/cloturer")
-    String cloturerReservation(@PathVariable(value = "idResa")Long idResa){
+    ResponseEntity cloturerReservation(@PathVariable(value = "idResa")Long idResa){
+
         Reservation reservation= reservationRepository.findById(idResa).get();
 
         if (reservation!=null){
@@ -83,8 +85,8 @@ public class ReservationController {
                 copy.setDispo(true);
                 copiesRepository.save(copy);
                 reservationRepository.save(reservation);
-                return "ok";
+                return new ResponseEntity<>("reservation cloturer", HttpStatus.OK);
             }
-        }return "Not ok";
+        }return new ResponseEntity<>("reservation introuvable", HttpStatus.BAD_REQUEST);
     }
 }
