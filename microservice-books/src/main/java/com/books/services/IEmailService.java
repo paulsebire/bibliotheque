@@ -7,7 +7,6 @@ import javax.mail.MessagingException;
 import java.util.List;
 
 public interface IEmailService {
-    Email findByName(String name);
 
     void sendSimpleMessage(String email, String objet, String contenu) throws MessagingException;
 

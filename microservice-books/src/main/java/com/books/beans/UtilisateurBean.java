@@ -115,19 +115,4 @@ public class UtilisateurBean {
         this.enabled = enabled;
     }
 
-    @Override
-    public String toString() {
-        return "utilisateurBean{" +
-                "idUser=" + idUser +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", email='" + email + '\'' +
-                ", firstname='" + firstname + '\'' +
-                ", lastname='" + lastname + '\'' +
-                ", accountNonExpired=" + accountNonExpired +
-                ", accountNonLocked=" + accountNonLocked +
-                ", credentialsNonExpired=" + credentialsNonExpired +
-                ", enabled=" + enabled +
-                '}';
-    }
 }

@@ -2,6 +2,9 @@ package com.books.configurations;
 
 
 import com.books.batch.TaskOne;
+import com.books.dao.EmailRepository;
+import com.books.dao.ReservationRepository;
+import com.books.poxies.MicroserviceUtilisateurProxy;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.DefaultBatchConfigurer;
@@ -14,8 +17,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
-
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 
 
 @Configuration
@@ -28,11 +30,19 @@ public class BatchConfig{
     @Autowired
     private StepBuilderFactory steps;
 
+    @Autowired
+    private ReservationRepository reservationRepository;
+    @Autowired
+    private EmailRepository emailRepository;
+    @Autowired
+    private MicroserviceUtilisateurProxy microserviceUtilisateurProxy;
+    @Autowired
+    private JavaMailSenderImpl sender;
 
     @Bean
-    public Step stepOne(){
+    public Step stepOne() {
         return steps.get("stepOne")
-                .tasklet(new TaskOne())
+                .tasklet(new TaskOne(reservationRepository, emailRepository,microserviceUtilisateurProxy, sender))
                 .build();
     }
 

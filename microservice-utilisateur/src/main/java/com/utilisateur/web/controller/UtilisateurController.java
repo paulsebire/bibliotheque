@@ -29,5 +29,14 @@ public class UtilisateurController {
         return utilisateur;
     }
 
+    @GetMapping("/user/{id}")
+    public Utilisateur utilisateurById (@PathVariable Long id){
+        Optional<Utilisateur> u = utilisateurRepository.findById(id);
+        Utilisateur utilisateur = null;
+        if (u.isPresent()){
+            utilisateur=u.get();
+        }
+        return utilisateur;
+    }
 
 }

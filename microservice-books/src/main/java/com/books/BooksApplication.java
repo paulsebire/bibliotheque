@@ -22,10 +22,16 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
+import org.springframework.context.annotation.Bean;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 import javax.annotation.PostConstruct;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.Properties;
 
 @SpringBootApplication
 @EnableFeignClients("com.books")
@@ -120,35 +126,35 @@ public class BooksApplication {
 			copiesRepository.save(copy18);
 
 			
-			Reservation resa1 = new Reservation(copy1, new Date());
+			Reservation resa1 = new Reservation(copy1, new GregorianCalendar(2020, Calendar.FEBRUARY, 24).getTime());
 			resa1.setDateRetour(bibliService.ajouter4semaines(resa1.getDateEmprunt()));
 			resa1.setIdUtilisateur(3L);
 			copy1.setDispo(false);
 			copiesRepository.save(copy1);
 			reservationRepository.save(resa1);
 
-			Reservation resa2 = new Reservation(copy8, new Date());
+			Reservation resa2 = new Reservation(copy8, new GregorianCalendar(2020, Calendar.JANUARY, 11).getTime());
 			resa2.setDateRetour(bibliService.ajouter4semaines(resa2.getDateEmprunt()));
 			resa2.setIdUtilisateur(3L);
 			copy8.setDispo(false);
 			copiesRepository.save(copy8);
 			reservationRepository.save(resa2);
 
-			Reservation resa3 = new Reservation(copy10, new Date());
+			Reservation resa3 = new Reservation(copy10, new GregorianCalendar(2020, Calendar.MARCH, 16).getTime());
 			resa3.setDateRetour(bibliService.ajouter4semaines(resa3.getDateEmprunt()));
 			resa3.setIdUtilisateur(3L);
 			copy10.setDispo(false);
 			copiesRepository.save(copy10);
 			reservationRepository.save(resa3);
 
-			Reservation resa4 = new Reservation(copy14, new Date());
+			Reservation resa4 = new Reservation(copy14, new GregorianCalendar(2020, Calendar.MARCH, 21).getTime());
 			resa4.setDateRetour(bibliService.ajouter4semaines(resa4.getDateEmprunt()));
 			resa4.setIdUtilisateur(1L);
 			copy14.setDispo(false);
 			copiesRepository.save(copy14);
 			reservationRepository.save(resa4);
 
-			Reservation resa5 = new Reservation(copy18, new Date());
+			Reservation resa5 = new Reservation(copy18, new GregorianCalendar(2020, Calendar.FEBRUARY, 02).getTime());
 			resa5.setDateRetour(bibliService.ajouter4semaines(resa5.getDateEmprunt()));
 			resa5.setIdUtilisateur(1L);
 			copy18.setDispo(false);
@@ -168,6 +174,7 @@ public class BooksApplication {
 
 		emailRepository.save(email);
 	}
+
 
 
 }

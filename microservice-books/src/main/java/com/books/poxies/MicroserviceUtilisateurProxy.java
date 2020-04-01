@@ -13,7 +13,6 @@ import java.util.List;
 
 @FeignClient(name = "zuul-server",contextId = "microserviceUtilisateurProxy",
                 configuration= FeignConfig.class,url = "http://localhost:9004")
-@Component
 @RequestMapping("/microservice-utilisateur")
 public interface MicroserviceUtilisateurProxy {
 
@@ -21,6 +20,9 @@ public interface MicroserviceUtilisateurProxy {
     List<UtilisateurBean> utilisateurList();
 
     @GetMapping("/utilisateur/{username}")
-    UtilisateurBean utilisateurByUsername(@PathVariable String username);
+    UtilisateurBean utilisateurByUsername(@PathVariable(value = "username") String username);
+
+    @GetMapping("/user/{id}")
+    UtilisateurBean utilisateurById(@PathVariable(value = "id") Long id);
 
 }
