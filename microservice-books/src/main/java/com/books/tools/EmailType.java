@@ -5,14 +5,16 @@ public class EmailType {
      String email;
      String titre;
      String dateDeFinDuPret;
+     String username;
 
     public EmailType() { super();
     }
 
-    public EmailType(String email, String titre, String dateDeFinDuPret) {
+    public EmailType(String email, String titre, String dateDeFinDuPret,String username) {
         this.email = email;
         this.titre = titre;
         this.dateDeFinDuPret = dateDeFinDuPret;
+        this.username=username;
     }
 
     public String getEmail() {
@@ -37,5 +39,13 @@ public class EmailType {
 
     public void setDateDeFinDuPret(String dateDeFinDuPret) {
         this.dateDeFinDuPret = dateDeFinDuPret;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 }

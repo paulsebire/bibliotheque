@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.List;
 
 @FeignClient(name = "zuul-server",contextId = "microserviceUtilisateurProxy",
-                configuration= FeignConfig.class,url = "http://localhost:9004")
+                configuration= FeignConfig.class)
 @Component
 @RequestMapping("/microservice-utilisateur")
 public interface MicroserviceUtilisateurProxy {

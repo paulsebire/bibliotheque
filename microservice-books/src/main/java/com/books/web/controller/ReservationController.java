@@ -11,10 +11,7 @@ import com.books.web.exceptions.ReservationNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -73,7 +70,7 @@ public class ReservationController {
         }return new ResponseEntity<>("reservation introuvable", HttpStatus.BAD_REQUEST);
     }
 
-    @PostMapping(value = "/reservation/{idResa}/cloturer")
+    @PutMapping(value = "/reservation/{idResa}/cloturer")
     ResponseEntity cloturerReservation(@PathVariable(value = "idResa")Long idResa){
 
         Reservation reservation= reservationRepository.findById(idResa).get();

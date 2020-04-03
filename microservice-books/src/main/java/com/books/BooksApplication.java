@@ -9,6 +9,7 @@ import com.books.entities.Book;
 import com.books.entities.Copy;
 import com.books.entities.Email;
 import com.books.entities.Reservation;
+import com.books.exceptions.CustomErrorDecoder;
 import com.books.poxies.MicroserviceUtilisateurProxy;
 import com.books.services.BibliServiceImpl;
 import org.springframework.batch.core.Job;
@@ -54,6 +55,10 @@ public class BooksApplication {
 		SpringApplication.run(BooksApplication.class, args);
 	}
 
+	@Bean
+	public CustomErrorDecoder CustomErrorDecoder() {
+		return new CustomErrorDecoder();
+	}
 
 	@PostConstruct
 	private void postConstruct() {
@@ -164,7 +169,7 @@ public class BooksApplication {
 		Email email = new Email();
 		email.setName("relance");
 		email.setObjet("relance pour livre non rendu");
-		email.setContenu("Bonjour, \n "+
+		email.setContenu("Bonjour [USERNAME], \n "+
 				"\n"+
 				"\tVous deviez rendre le livre [LIVRE_TITRE] à la blibliothèque au plus tard à la date : [DATE_FIN].\n" +
 				"à ce jour nous n'avons toujours pas enregistré le retour de ce livre.\n" +

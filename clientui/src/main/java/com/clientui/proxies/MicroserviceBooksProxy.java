@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @FeignClient(name = "zuul-server",contextId = "microserviceBooksProxy",
-            configuration= FeignConfig.class,url = "http://localhost:9004")
+            configuration= FeignConfig.class)
 @Component
 public interface MicroserviceBooksProxy {
 

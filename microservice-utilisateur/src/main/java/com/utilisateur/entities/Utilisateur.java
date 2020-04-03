@@ -37,7 +37,7 @@ public class Utilisateur implements Serializable {
     private String password;
 
     @NotNull
-    @Column(name = "email", nullable = false, unique = true)
+    @Column(name = "email", nullable = false)
     @Email(message = "Veuillez saisir une adresse mail valide")
     private String email;
 

@@ -53,18 +53,16 @@ public class TaskOne implements Tasklet {
 
         if (reservationList.size() > 0){
             for (Reservation res : reservationList) {
-                System.out.println("id= "+res.getIdUtilisateur());
                 UtilisateurBean utilisateurBean = microserviceUtilisateurProxy.utilisateurById(res.getIdUtilisateur());
-                if (res.isCloturer()==false&&res.getDateRetour().compareTo(date)<0&&utilisateurBean!=null){
-                    emailType.add(new EmailType(utilisateurBean.getEmail(),
-                            res.getCopy().getBook().getName(), oldFormat.format(res.getDateRetour())));
-                }
+                if (res.isCloturer()==false&&utilisateurBean!=null&&res.getDateRetour().compareTo(date)<0)
+                emailType.add(new EmailType(utilisateurBean.getEmail(),
+                            res.getCopy().getBook().getName(), oldFormat.format(res.getDateRetour()),utilisateurBean.getUsername()));
+
             }
+            List<EmailType> emailList = new ArrayList<>(emailType);
+            this.sendRevival(emailList);
         }
 
-
-        List<EmailType> emailList = new ArrayList<>(emailType);
-        this.sendRevival(emailList);
 
         System.out.println("fin du batch de relance");
 
@@ -78,6 +76,7 @@ public class TaskOne implements Tasklet {
 
         for (EmailType e: emailList) {
             String text = email.getContenu()
+                    .replace("[USERNAME]", e.getUsername())
                     .replace("[LIVRE_TITRE]", e.getTitre())
                     .replace("[DATE_FIN]", e.getDateDeFinDuPret());
             this.sendSimpleMessage(e.getEmail(),email.getObjet(),text);
