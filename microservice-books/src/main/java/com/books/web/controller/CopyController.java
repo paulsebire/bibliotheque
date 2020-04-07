@@ -17,6 +17,11 @@ public class CopyController {
     @Autowired
     private CopiesRepository copiesRepository;
 
+    /**
+     * resume the copies available for a books
+     * @param id id of the book
+     * @return a list of available copies
+     */
     @GetMapping(value = "/livre/{id}/copies")
     public List CopiesDispo(@PathVariable(value = "id")Long id){
         List<Copy> copies = copiesRepository.ListCopyDispoByBook(id);

@@ -34,12 +34,12 @@ public class ClientController {
     @Autowired
     private MicroserviceUtilisateurProxy utilisateurProxy;
 
-    /*
-    * Étape (1)
-    * Opération qui récupère la liste des produits et on les affichent dans la page d'accueil.
-    * Les produits sont récupérés grâce à ProduitsProxy
-    * On fini par rentourner la page Accueil.html à laquelle on passe la liste d'objets "produits" récupérés.
-    * */
+    /**
+     * method to generate the home page
+     * @param model model
+     * @param mc keyword of research function
+     * @return the view  Accueil
+     */
     @GetMapping("/")
     public String accueil(Model model,@RequestParam(name = "mc", defaultValue = "")String mc){
         List<BookBean> livres =  booksProxy.bookList(mc);
@@ -50,11 +50,12 @@ public class ClientController {
     }
 
 
-    /*
-    * Étape (2)
-    * Opération qui récupère les détails d'un produit
-    * On passe l'objet "produit" récupéré et qui contient les détails en question à  FicheProduit.html
-    * */
+    /**
+     * method to  display a specific book
+     * @param id id of the book
+     * @param model model
+     * @return the view fichelivre
+     */
     @GetMapping("/fiche-livre/{id}")
     public String ficheLivre(@PathVariable Long id,  Model model){
 
@@ -67,6 +68,11 @@ public class ClientController {
         return "FicheLivre";
     }
 
+    /**
+     * method  to acces a list  of all users
+     * @param model model
+     * @return the view users
+     */
     @GetMapping("/users")
     public String allUsers(Model model){
         List<UtilisateurBean> userList= utilisateurProxy.utilisateurList();
@@ -74,6 +80,11 @@ public class ClientController {
         return "users";
     }
 
+    /**
+     * method to access to personal space
+     * @param model model
+     * @return the view monprofile
+     */
     @GetMapping("/MonProfile")
     public String monProfile (Model model){
         UtilisateurBean utilisateur = (UtilisateurBean) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -82,6 +93,11 @@ public class ClientController {
         return "MonProfile";
     }
 
+    /**
+     * mehtod to give extra time to a reservation
+     * @param id  id of the reservation
+     * @return the view monprofile
+     */
     @GetMapping("/reservation/{id}/prolonger")
     public String prolongerResa(@PathVariable(value = "id")Long id){
         UtilisateurBean utilisateur = (UtilisateurBean) SecurityContextHolder.getContext().getAuthentication().getPrincipal();

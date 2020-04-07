@@ -17,18 +17,32 @@ public class UtilisateurController {
     @Autowired
     private UtilisateurRepository utilisateurRepository;
 
+    /**
+     * resume all users
+     * @return a list of all users
+     */
     @GetMapping("/utilisateurs")
     public List<Utilisateur> utilisateursList (){
         List<Utilisateur> utilisateurList = utilisateurRepository.findAll();
         return utilisateurList;
     }
 
+    /**
+     * find a user by his username
+     * @param username name of the user
+     * @return an object user
+     */
     @GetMapping("/utilisateur/{username}")
     public Utilisateur utilisateurByUsername (@PathVariable String username){
         Utilisateur utilisateur  = utilisateurRepository.findByUsername(username.toLowerCase());
         return utilisateur;
     }
 
+    /**
+     * find a user by his id
+     * @param id id of the user
+     * @return an object user
+     */
     @GetMapping("/user/{id}")
     public Utilisateur utilisateurById (@PathVariable Long id){
         Optional<Utilisateur> u = utilisateurRepository.findById(id);

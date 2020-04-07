@@ -19,12 +19,22 @@ public class BookController {
     @Autowired
     private BookRepository bookRepository;
 
+    /**
+     * resume all books in the database
+     * @param mc keyword for research function
+     * @return  a list of books object
+     */
     @GetMapping(value = "/livres")
     public List<Book> bookList(@RequestParam(name = "mc", defaultValue = "")String mc){
         List<Book> books = bookRepository.chercherParTitre("%"+mc+"%");
         return books;
     }
 
+    /**
+     * find a book by his name
+     * @param id books id
+     * @return an object book
+     */
     @GetMapping( value = "/livre/{id}")
     public Optional<Book> recupererUnLivre(@PathVariable long id) {
 

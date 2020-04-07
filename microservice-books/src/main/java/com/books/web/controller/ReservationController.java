@@ -28,7 +28,11 @@ public class ReservationController {
     @Autowired
     private CopiesRepository copiesRepository;
 
-
+    /**
+     * find reservations in Db for a specific user
+     * @param id id of the user
+     * @return alist of reservations
+     */
     @GetMapping(value = "/utilisateur/{id}/reservations/")
     public List<Reservation> reservationList(@PathVariable(value = "id")Long id){
         List<Reservation> reservations = reservationRepository.findAllByIdUtilisateurAndCloturerFalseOrderByIdAsc(id);
@@ -36,8 +40,14 @@ public class ReservationController {
         return reservations;
     }
 
+    /**
+     * method to give credit time to a reservation
+     * @param idResa id of the reservation
+     * @param idUser id of the borrower
+     * @return a response entity depending on the scenario
+     */
     @PostMapping(value = "/utilisateur/{idUser}/reservations/{idResa}/prolonger")
-    void prolongerReservation(@PathVariable(value = "idResa")Long idResa,@PathVariable(value = "idUser") Long idUser){
+    ResponseEntity prolongerReservation(@PathVariable(value = "idResa")Long idResa,@PathVariable(value = "idUser") Long idUser){
         Optional<Reservation> r= reservationRepository.findById(idResa);
         Date dateDujour = new Date();
         if (r.isPresent()){
@@ -47,10 +57,17 @@ public class ReservationController {
                 reservation.setProlonger(true);
                 reservation.setDateRetour(bibliService.ajouter4semaines(reservation.getDateRetour()));
                 reservationRepository.save(reservation);
-            } else throw new ReservationNotFoundException("operation impossible");
-        } else throw new ReservationNotFoundException("La reservation n'est pas disponible");
+                return new ResponseEntity<>("reservation effectué", HttpStatus.OK);
+            } else return new ResponseEntity<>("reservation introuvable", HttpStatus.BAD_REQUEST);
+        } else return new ResponseEntity<>("reservation introuvable", HttpStatus.BAD_REQUEST);
     }
 
+    /**
+     * method to create a reservation
+     * @param idUser id of the borrower
+     * @param idCopy if of the copy borrowed
+     * @return a response entity depending on the scenario
+     */
     @PostMapping(value = "/utilisateur/{idUser}/copie/{idCopy}/reserver")
      ResponseEntity reserverCopy(@PathVariable(value = "idUser")Long idUser,@PathVariable(value = "idCopy")Long idCopy){
 
@@ -70,6 +87,11 @@ public class ReservationController {
         }return new ResponseEntity<>("reservation introuvable", HttpStatus.BAD_REQUEST);
     }
 
+    /**
+     * method to close a reservation
+     * @param idResa id of the reservation
+     * @return  a response entity depending on the scenario
+     */
     @PutMapping(value = "/reservation/{idResa}/cloturer")
     ResponseEntity cloturerReservation(@PathVariable(value = "idResa")Long idResa){
 
