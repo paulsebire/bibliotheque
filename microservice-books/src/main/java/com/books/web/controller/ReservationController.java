@@ -47,7 +47,7 @@ public class ReservationController {
      * @return a response entity depending on the scenario
      */
     @PostMapping(value = "/utilisateur/{idUser}/reservations/{idResa}/prolonger")
-    ResponseEntity prolongerReservation(@PathVariable(value = "idResa")Long idResa,@PathVariable(value = "idUser") Long idUser){
+    void prolongerReservation(@PathVariable(value = "idResa")Long idResa,@PathVariable(value = "idUser") Long idUser){
         Optional<Reservation> r= reservationRepository.findById(idResa);
         Date dateDujour = new Date();
         if (r.isPresent()){
@@ -57,9 +57,8 @@ public class ReservationController {
                 reservation.setProlonger(true);
                 reservation.setDateRetour(bibliService.ajouter4semaines(reservation.getDateRetour()));
                 reservationRepository.save(reservation);
-                return new ResponseEntity<>("reservation effectué", HttpStatus.OK);
-            } else return new ResponseEntity<>("reservation introuvable", HttpStatus.BAD_REQUEST);
-        } else return new ResponseEntity<>("reservation introuvable", HttpStatus.BAD_REQUEST);
+            }
+        }
     }
 
     /**

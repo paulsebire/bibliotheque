@@ -5,6 +5,7 @@ import com.clientui.beans.CopyBean;
 import com.clientui.beans.ReservationBean;
 import com.clientui.configuration.FeignConfig;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 
@@ -52,5 +53,5 @@ public interface MicroserviceBooksProxy {
      * @param idUser id of the borrower
      */
     @PostMapping(value = "/microservice-books/utilisateur/{idUser}/reservations/{idResa}/prolonger")
-    void prolongerReservation(@PathVariable(value = "idResa")Long idResa,@PathVariable(value = "idUser") Long idUser);
+    void prolongerReservation(@PathVariable(value = "idResa")Long idResa, @PathVariable(value = "idUser") Long idUser);
 }

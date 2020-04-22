@@ -25,7 +25,6 @@
 </head>
 <body layout:fragment="content">
     <div class="container">
-        <h1 class="text-center" >Application Bibiotheque</h1>
 
         <div class="row spacer" th:if="${livres.size()>0}">
             <div th:each="livre : ${livres}" class="col-md-3 my-1">
