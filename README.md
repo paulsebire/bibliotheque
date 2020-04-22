@@ -4,7 +4,10 @@ How to launch the application ?
 -
 Once the project cloned, you have to create two DataBases "biliotheque" and "bilioutilisateur" in PostgreSQL on port 5433
 you don't need to import data, data will be create at the launching.
-Import  as maven project.
+Remember to import modules in project structure as maven project.
+you have to launch the micro-services in that specific order:
+ConfigServer / Eureka / Zuul / micro-service Utilisateur / microservice books / clientUi
+
 <br/>
 
 Then , go on your browser and enter  the following URL:
