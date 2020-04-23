@@ -32,8 +32,8 @@
                 <img th:src="${resa.copy.book.coverUrl}"  class="card-img-top" width="200" height="350" /></a>
                 <p th:text= "${resa.copy.book.name}"></p>
                 <p th:text= "${resa.copy.book.author}"></p>
-                <p> Emprunté le:<span th:text="${#dates.format(resa.dateEmprunt, 'dd/MM/yyyy')}"/></p>
-                <p> A retourné le:<span th:text="${#dates.format(resa.dateRetour, 'dd/MM/yyyy')}"/></p>
+                <p> Emprunté le: <span th:text="${#dates.format(resa.dateEmprunt, 'dd/MM/yyyy')}"/></p>
+                <p> A retourné le: <span th:text="${#dates.format(resa.dateRetour, 'dd/MM/yyyy')}"/></p>
                 <a class="btn btn-primary" th:text="Prolonger" th:if="${resa.prolonger==false}"
                    th:href="@{|/reservation/${resa.id}/prolonger|}"></a>
             </div>

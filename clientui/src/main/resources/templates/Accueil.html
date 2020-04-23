@@ -26,17 +26,23 @@
 <body layout:fragment="content">
     <div class="container">
 
-        <div class="row spacer" th:if="${livres.size()>0}">
-            <div th:each="livre : ${livres}" class="col-md-3 my-1">
-                <a th:href="@{|/fiche-livre/${livre.id}|}" >
-                <img th:src="${livre.coverUrl}"  class="card-img-top" width="200" height="350" /></a>
-                <p th:text= "${livre.name}"></p>
-                <p th:text= "${livre.author}"></p>
+        <div class=" container spacer row justify-content-center">
+            <div class="card-deck">
+                <div class="card" th:each="livre : ${livres}">
+                    <a class="text-center" th:href="@{|/fiche-livre/${livre.id}|}">
+                        <img  th:src="${livre.coverUrl}">
+                    </a>
+                    <div class="card-body">
+                        <h5 class="card-title" th:text="${livre.name}"></h5>
+                        <p class="card-text" th:text="${livre.author}"></p>
+                    </div>
+                </div>
             </div>
+
         </div>
         <div class="spacer" th:if="${livres.size()==0}">
             <br/>
-            <h2>Aucun résultat ne correspond à votre recherche<h2/>
+            <h2>Aucun résultat ne correspond à votre recherche</h2>
         </div>
     </div>
 </body>

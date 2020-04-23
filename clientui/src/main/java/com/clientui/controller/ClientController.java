@@ -101,7 +101,7 @@ public class ClientController {
     @GetMapping("/reservation/{id}/prolonger")
     public String prolongerResa(@PathVariable(value = "id")Long id){
         UtilisateurBean utilisateur = (UtilisateurBean) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        System.out.println("user"+utilisateur);
+        System.out.println("id"+utilisateur.getIdUser());
         booksProxy.prolongerReservation(id,utilisateur.getIdUser());
         return "redirect:/MonProfile";
     }
